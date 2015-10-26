@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="utf-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="description" content="">
+          <meta name="author" content="">
+
+          <title>snapchat - aloneindecember</title>
+                  <!-- Bootstrap core CSS -->
+   <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+  
+
+  <head>
+  <meta charset="UTF-8">
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      recsys challenge : part III &middot; words
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/styles.css">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/atom+xml" title="words" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="container content">
+      <header class="masthead">
+        <h1 class="masthead-title">
+          <a href="/" title="Home">words</a>
+        </h1>
+         <h2><a href="http://hcorona.github.io"> home</a>  / <a href="http://hcorona.github.io/hacks.html">hacks</a> / <a href="http://hcorona.github.io/words.html">words</a> / <a href="http://hcorona.github.io/hacks.html">diary</a></h2>
+
+      </header>
+
+      <main>
+        <article class="post">
+  <h1 class="post-title">recsys challenge : part III</h1>
+  <time datetime="2015-02-03T00:00:00+00:00" class="post-date">03 Feb 2015</time>
+  <p>In the last two posts about the recsys challenge  (<a href="http://aloneindecember.com/words/recsys-challenge-part-i/">part</a> I and <a href="http://aloneindecember.com/words/recsys-challenge-part-ii/">part II</a>) I have discussed in detail some aspects of this year’s challenge data. This time I present an analysis of the data from the point of view of categories and the role they play in clicks, sessions and buys.</p>
+
+<h2 style="text-align: center;">
+  Users seem to find items searching for brands,categories, or pushed by sales in the platform!
+</h2>
+
+<p><a href="https://www.youtube.com/watch?v=gWcYOz2fpMk">First things firsts</a>, we have 52K items distributed in 339 categories. However, clicks are not equally distributed across these categories, and nor are the items. As we expect, both follow a <a href="http://www.longtail.com/about.html">long tail</a> distribution.</p>
+
+<p>Let’s take a closer look at items and clicks. <em>Which category gets the most number of clicks? What categories gets a higher number of purchases?</em>  The figure below shows the distribution of clicks across categories. The horizontal axis shows all the categories in the dataset (sorted by number of clicks)  and the vertical axis shows the number of clicks per each category in a logarithmic scale. Thus, we know that there are a very limited number of categories that get most of the clicks (around 50), while the remainder 250 or so get a very limited number of clicks.  Worth mentioning that the decay of the distribution is very steep, like the Cliffs of Moher (as seen in my <a href="http://diary.aloneindecember.com/post/91981935551">visual diary</a>)</p>
+
+<div id="attachment_427" style="width: 710px" class="wp-caption aligncenter">
+  <a href="http://aloneindecember.com/words/wp-content/uploads/2015/02/cat_pop_clicks.png"><img class="size-large wp-image-427" src="http://aloneindecember.com/words/wp-content/uploads/2015/02/cat_pop_clicks-1024x613.png" alt="The distribution of categories across clicks follows a long tail distribution" width="700" height="419" /></a>
+  
+  <p class="wp-caption-text">
+    The distribution of categories across clicks follows a long tail distribution
+  </p>
+</div>
+
+<p>Let’s take a closer look at the distribution. The figure below focuses on the top 10 categories, sorted by number of clicks. Together, all the items from the category ‘0’ where clicked 16337653 times, which is 155 times more clicks than for category ‘9’, in which users clicked 105282 times. In fact, the first 10 categories shown below account for 99% of all clicks in the dataset. Leaving the remainder 299 categories with only 1% of the clicks, very uninteresting items seems to be …</p>
+
+<p>Besides the distribution, something that strikes me is why is there an <span style="color: #ff99cc;"><em><strong>‘S’</strong></em></span> category, when all the other categories are encoded with numbers? Does it has an special meaning? Comments section is open if you have an answer or theory.</p>
+
+<div id="attachment_432" style="width: 710px" class="wp-caption aligncenter">
+  <a href="http://aloneindecember.com/words/wp-content/uploads/2015/02/cat_pop_clicks_top2.png"><img class="wp-image-432 size-large" src="http://aloneindecember.com/words/wp-content/uploads/2015/02/cat_pop_clicks_top2-1024x613.png" alt="cat_pop_clicks_top" width="700" height="419" /></a>
+  
+  <p class="wp-caption-text">
+    Distribution of clicks for the top 10 most clicked categories
+  </p>
+</div>
+
+<p>Now we can compare the graph above  with the one below, obtained from <a href="http://www.walkersands.com/futureofretail">Walker Sands’ 2014 future of retail study</a>.We could asume, or figure out that the categories are also organised as below. Dreaming or imagining is free, so why not? Anyway, that doesn’t tells much. If we knew what type of categories get more buys and that was different to the clicks they get, that would be intresting, right? <strong>#moredataplease </strong></p>
+
+<div id="attachment_440" style="width: 310px" class="wp-caption aligncenter">
+  <a href="http://aloneindecember.com/words/wp-content/uploads/2015/02/Screen-Shot-2015-02-01-at-17.32.01.png"><img class="wp-image-440 size-medium" src="http://aloneindecember.com/words/wp-content/uploads/2015/02/Screen-Shot-2015-02-01-at-17.32.01-300x214.png" alt="The categories of products most bought online" width="300" height="214" /></a>
+  
+  <p class="wp-caption-text">
+    The categories of products most bought online
+  </p>
+</div>
+
+<p>I know have more questions than when I started. For example,* is the distribution of categories across items the same as across clicks? Do categories get more clicks because those categories have more items?* <strong>NO!</strong></p>
+
+<p>The graph below shows the top 10 categories sorted by number of items. The vertical axis shows each category with it’s id, sorted by the category size, while the vertical item represents the number of items in a logarithmic scale.  We see some of the categories from the graph above, while some new categories come in, showing that not all the categories with a large number of items necessarily get a large number of clicks.</p>
+
+<div id="attachment_434" style="width: 710px" class="wp-caption aligncenter">
+  <a href="http://aloneindecember.com/words/wp-content/uploads/2015/02/cat_items1.png"><img class="size-large wp-image-434" src="http://aloneindecember.com/words/wp-content/uploads/2015/02/cat_items1-1024x613.png" alt="Distribution of categories across items" width="700" height="419" /></a>
+  
+  <p class="wp-caption-text">
+    Distribution of categories across items
+  </p>
+</div>
+
+<p>So far so good, all pretty boring until here … except for the magic “S” and the category “0”. The way the data is presented, we could assume that each item belongs to only one category. However, the figure below shows that this is not the case. Some items appear in our click data with more than one category in different transactions, now that is something I didn’t expect…</p>
+
+<div id="attachment_437" style="width: 710px" class="wp-caption aligncenter">
+  <a href="http://aloneindecember.com/words/wp-content/uploads/2015/02/correlation2.png"><img class="wp-image-437 size-large" src="http://aloneindecember.com/words/wp-content/uploads/2015/02/correlation2-1024x613.png" alt="correlation" width="700" height="419" /></a>
+  
+  <p class="wp-caption-text">
+    Correlation between categories
+  </p>
+</div>
+
+<p>The figure above shows the number of shared items among the biggest categories (transformed by a logarithm for better visualisation). The first thing we see is that the category ‘0’ is highly correlated to all the other ones, the same goes for category ‘S’. My assumption here is that those categories are used as ‘<em>default</em>‘ or ‘<em>none</em>‘, and at some point they are replaced by a better indicator of the category, or simply those are categories which apply to almost every item.  Either ways, it is something to bare in mind when building the models to predict purchases</p>
+
+<p>We can see from the graph above that category ‘0’ is highly correlated to most of the other top 10 cateories. But that is not the case for most of them (except ‘S’ which is also correlated to most of the others). My assumption is that category 0 just means no category, and category S means something similar . However, we know that the data is dynamic, so the products might be unlabeled and then labeled, or mislabeled, and then unlabeled … the magic of real world data?</p>
+
+<p>Finally, we can analyse the categories and sessions together, with the hope to find more answers, and even more questions. <em>Do people tend to click in many categories, do they browse mostly in one category?</em> The graph below shows that users tend to browse within one category.</p>
+
+<div id="attachment_439" style="width: 710px" class="wp-caption aligncenter">
+  <a href="http://aloneindecember.com/words/wp-content/uploads/2015/02/cat_sessions.png"><img class="wp-image-439 size-large" src="http://aloneindecember.com/words/wp-content/uploads/2015/02/cat_sessions-1024x613.png" alt="cat_sessions" width="700" height="419" /></a>
+  
+  <p class="wp-caption-text">
+    In a typical session, the user browses though only one or two categories
+  </p>
+</div>
+
+<p> </p>
+
+<p>This is the typical scenario, where you are looking to buy the latest Lena Dunham book, <a href="http://www.amazon.co.uk/Not-That-Kind-Girl-Learned/dp/0008101264/ref=sr_1_1?ie=UTF8&amp;qid=1422988023&amp;sr=8-1&amp;keywords=lenna+dunham">I’m not that kind of girl</a> (highly recommendable one by the way) and you get lost browsing though thousands of similar books such as Tavi Gevison’s <a href="http://www.amazon.co.uk/s/ref=a9_sc_1?rh=i%3Aaps%2Ck%3Arookie+yearbook&amp;keywords=rookie+yearbook&amp;ie=UTF8&amp;qid=1422988039">Rookie yearbook</a>. However, in the same session you wouldn’t probably search for a <a href="http://www.amazon.co.uk/Kitchen-Craft-KCBANSLICE-Banana-Slicer/dp/B003CLFC98/ref=sr_1_1?ie=UTF8&amp;qid=1422988086&amp;sr=8-1&amp;keywords=banana+slicer">Banana slicer</a> (a very popular and mediocre item in amazon with hilarious reviews)</p>
+
+<p><strong>As you might have figured out already, I don’t answer all the questions I propose.</strong> Some of them will be left for future posts, some of them are food for thought. Download the data, do the analysis and share it!  Finally,  I would like to thank the members of the  <a href="https://www.insight-centre.org/about/team">recommender systems team</a> in the <a href="https://www.insight-centre.org">Insight Centre for Data Analytics</a> for their discussions on this topic. Some of the figures here were first shown to me by them.</p>
+
+
+</article>
+
+
+      </main>
+
+      <footer class="footer">
+        <small>
+          &copy; <time datetime="2015-10-26T16:22:32+00:00">2015</time>. All rights reserved.
+        </small>
+      </footer>
+    </div>
+
+  </body>
+</html>
