@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Your New Jekyll Site - recsys challenge: part I</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href="/rss.xml">
+  <link rel="stylesheet" href="/assets/css/highlight.css">
+</head>
+<body>
+
+  <nav class="main-nav">
+    
+        <a href="/"> <span class="arrow">←</span> Home </a>
+    
+
+    
+        
+            <a href="/about">About </a>
+        
+    
+    <a class="cta" href="/feed.xml">Subscribe</a>
+</nav>
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>recsys challenge: part I</h1>
+        <h2 class="headline">January 6, 2015</h2>
+    </header>
+    <section id="post-body">
+        <p><a href="http://recsys.acm.org/recsys15/">RecSys’15</a> is ready to roll! We have a date, a venue, a call for papers, and, of course, a challenge. Last November, the details for this year&#8217;s RecSys challenge were announced, and the leaderboards are already getting submissions (more info in the <a href="http://recsys.acm.org/recsys15/challenge/">RecSys&#8217;15 website</a> and the <a href="http://2015.recsyschallenge.com">challenge website</a>)</p>
+
+<p>The german company <a href="http://www.yoochoose.com/en/">Yoochoose</a>, which provides recommendations for e-commerce platforms, news and media, sponsors the competition. They give us a dataset of completely anonimized (unless otherwise proven) implicit feedback data coming from an e-commerce business located in Europe. The business sells all kind of stuff such as garden tools, toys, clothes, electronics and much more.</p>
+
+<h3 style="text-align: center;">
+  <strong>33 MILLION CLICKS</strong><br /> <strong>1.1 MILLION BUYS</strong><br /> <strong>9 MILLION SESSIONS (USERS)</strong><br /> <strong>53K ITEMS</strong>
+</h3>
+
+<p>The data represents six months worth of clicks grouped in sessions, from April 1st to September 30th. For some of the sessions (around 5%), there are also buying events, which is the interesting part, as the goal of this challenge is to predict whether the user (a session) is going to buy something or not, and if she is actually buying, what are the items bought. At this point it is important to note that user and sessions are equivalent in this problem. Since the data is anonymised, the terms session and users are interchangeable in this post.</p>
+
+<p><strong>The problem can be defined in the following way: Given a sequence of click events (recorded in a user session on the e-commerce website)</strong></p>
+
+<ul>
+<li><strong>Is the user going to buy items in this session?</strong></li>
+<li><strong>If the user buys, what are the items that are going to be bought?</strong></li>
+</ul>
+
+<p>I have already introduced the problem, now it is time to analyze the data. I will not go into detail about the data representation, as it is very well described in the competition website (<a href="http://2015.recsyschallenge.com/challenge.html">under challenge</a>). The data is presented in two files, one for clicks and another one for buys. However, in this analysis I present the clicks and buy from the same session together, to get a better sense of the problem.</p>
+
+<table class="MsoTableGrid" style="border-collapse: collapse; border: none; mso-border-alt: solid windowtext .5pt; mso-yfti-tbllook: 1184; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt;" border="1" cellspacing="0" cellpadding="0">
+  <tr style="mso-yfti-irow: 0; mso-yfti-firstrow: yes;">
+    <td style="width: 140.1pt; border: solid windowtext 1.0pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="140">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <b style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; font-family: Helvetica;"> </span></b>
+      </p>
+    </td>
+    
+    <td style="width: 70.85pt; border: solid windowtext 1.0pt; border-left: none; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="71">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <b style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; font-family: Helvetica;">AVERAGE</span></b>
+      </p>
+    </td>
+    
+    <td style="width: 108.4pt; border: solid windowtext 1.0pt; border-left: none; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="108">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <b style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; font-family: Helvetica;">MEDIAN</span></b>
+      </p>
+    </td>
+    
+    <td style="width: 106.45pt; border: solid windowtext 1.0pt; border-left: none; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="106">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <b style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; font-family: Helvetica;">STD</span></b>
+      </p>
+    </td>
+  </tr>
+  
+  <tr style="mso-yfti-irow: 1;">
+    <td style="width: 140.1pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="140">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <b style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; font-family: Helvetica;">SESSION LENGTH<br /> (EVENTS)</span></b>
+      </p>
+    </td>
+    
+    <td style="width: 70.85pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="71">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <span style="font-size: 11.0pt; font-family: Helvetica;">3.693</span>
+      </p>
+    </td>
+    
+    <td style="width: 108.4pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="108">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <span style="font-size: 11.0pt; font-family: Helvetica;">2.0</span>
+      </p>
+    </td>
+    
+    <td style="width: 106.45pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="106">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <span style="font-size: 11.0pt; font-family: Helvetica;">4.04</span>
+      </p>
+      
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <span style="font-size: 11.0pt; font-family: Helvetica;"> </span>
+      </p>
+    </td>
+  </tr>
+  
+  <tr style="mso-yfti-irow: 2;">
+    <td style="width: 140.1pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="140">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <b style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; font-family: Helvetica;">SESSSION LENGTH<br /> (<strong>EVENTS</strong>)</span></b>
+      </p>
+    </td>
+    
+    <td style="width: 70.85pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="71">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <span style="font-size: 11.0pt; font-family: Helvetica;">404.428</span>
+      </p>
+    </td>
+    
+    <td style="width: 108.4pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="108">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <span style="font-size: 11.0pt; font-family: Helvetica;">134.0</span>
+      </p>
+    </td>
+    
+    <td style="width: 106.45pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="106">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <span style="font-size: 11.0pt; font-family: Helvetica;">782.123</span>
+      </p>
+    </td>
+  </tr>
+  
+  <tr style="mso-yfti-irow: 3;">
+    <td style="width: 140.1pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="140">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <b style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; font-family: Helvetica;">CLICKS PER ITEM</span></b>
+      </p>
+    </td>
+    
+    <td style="width: 70.85pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="71">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <span style="font-size: 11.0pt; font-family: Helvetica;">625.79</span>
+      </p>
+    </td>
+    
+    <td style="width: 108.4pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="108">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <span style="font-size: 11.0pt; font-family: Helvetica;">22.0</span>
+      </p>
+    </td>
+    
+    <td style="width: 106.45pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="106">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <span style="font-size: 11.0pt; font-family: Helvetica;">2810.05</span>
+      </p>
+    </td>
+  </tr>
+  
+  <tr style="mso-yfti-irow: 4; mso-yfti-lastrow: yes;">
+    <td style="width: 140.1pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="140">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <b style="mso-bidi-font-weight: normal;"><span style="font-size: 11.0pt; font-family: Helvetica;">PURCHASES PER<br /> SESSION</span></b>
+      </p>
+    </td>
+    
+    <td style="width: 70.85pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="71">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <span style="font-size: 11.0pt; font-family: Helvetica;">0.124</span>
+      </p>
+    </td>
+    
+    <td style="width: 108.4pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="108">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <span style="font-size: 11.0pt; font-family: Helvetica;">0.0</span>
+      </p>
+    </td>
+    
+    <td style="width: 106.45pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt;" valign="top" width="106">
+      <p class="MsoNormal" style="margin-bottom: .0001pt; text-align: center; mso-pagination: none; tab-stops: 28.0pt 56.0pt 84.0pt 112.0pt 140.0pt 168.0pt 196.0pt 224.0pt 252.0pt 280.0pt 308.0pt 336.0pt; mso-layout-grid-align: none; text-autospace: none;" align="center">
+        <span style="font-size: 11.0pt; font-family: Helvetica;">0.687</span>
+      </p>
+    </td>
+  </tr>
+</table>
+
+<p style="text-align: left;">
+  The table above shows a large deviation (from the mean) in the number of clicks that an item receives. We further investigate this by plotting the item popularity distribution in the figure below. This figure shows the distribution of clicks across items. The horizontal axis represents each of the items (plotted in a logarithmic scale), while the vertical axis represents the number of clicks that particular item received (also plotted in a logarithmic scale).
+</p>
+
+<p style="text-align: left;">
+  Thus, we have the classical scenario of the long tail, where a small subset of items get many clicks (they are very popular), while most of the items in the catalog get a very small number of clicks. In this dataset, 10% of the items (the 5200 most popular) get circa 90% of the clicks, while the remaining 90% of items only get 10% of the clicks.
+</p>
+
+<div id="attachment_351" style="width: 710px" class="wp-caption aligncenter">
+  <a href="http://aloneindecember.com/words/wp-content/uploads/2015/01/image001.png"><img class="size-large wp-image-351" src="http://aloneindecember.com/words/wp-content/uploads/2015/01/image001-1024x796.png" alt="figure 1 caption" width="700" height="544" /></a>
+  
+  <p class="wp-caption-text">
+    Item popularity distribution
+  </p>
+</div>
+
+<p>Now let’s move on to session length, in the first effort to understand all the aspects of a session, as it is our main information source. We can measure session length in terms of number of clicks or time duration (for example, in seconds).</p>
+
+<p>From the table above we know that the average session length is 2.69 clicks and lasts around 6.7 minutes (404.42 seconds). However, the deviation from the mean in both metrics is very large. Thus, we will find very short sessions and very long sessions, of up to 68 hours (session id:  10145339 ) and 261 clicks (session id: 6149111).</p>
+
+<p>The figures below show the histogram of session lengths in time and clicks. The horizontal axis represents the length (seconds or clicks), while the vertical axis represents the number of sessions with that particular length in a logarithmic scale.</p>
+
+<p>From the information in the graphs, we know that 51% of the sessions have less than three clicks. Thus, sessions tend to be short (90% of the sessions have less than 8 clicks), and there are only a  few longer sessions, of up to 200 clicks.  We see similar patterns in the case of session length distribution calculated by clicks. Something expected, as clicks and time must be  highly correlated (<em>humans can only click and browse at a certain speed, right?</em>)<a href="http://aloneindecember.com/words/wp-content/uploads/2015/01/Screen-Shot-2015-04-01-at-11.42.15.png"><img class="aligncenter wp-image-484 size-large" src="http://aloneindecember.com/words/wp-content/uploads/2015/01/Screen-Shot-2015-04-01-at-11.42.15-1024x828.png" alt="Screen Shot 2015-04-01 at 11.42.15" width="700" height="566" /></a></p>
+
+<div id="attachment_353" style="width: 710px" class="wp-caption aligncenter">
+  <img class="wp-image-353 size-large" src="http://aloneindecember.com/words/wp-content/uploads/2015/01/image003-1024x741.png" alt="image003" width="700" height="507" />
+  
+  <p class="wp-caption-text">
+    Session length distribution (measured in time)
+  </p>
+</div>
+
+<p>Finally, it is very interesting to know if the number of times a user clicks (or the time a user spends browsing) is correlated with a higher probability of purchasing an item (do not mistake for number of items bought, that is a different story!)</p>
+
+<p>There is a clear trend showing that longer sessions have, on average, more shopping transactions. However, this is true up to around 40 clicks, and after that the number of sessions available is very small. (We don&#8217;t have many sessions with more than 40 clicks &#8211; only around 10000 to be exact)</p>
+
+<div id="attachment_357" style="width: 710px" class="wp-caption aligncenter">
+  <img class="wp-image-357 size-large" src="http://aloneindecember.com/words/wp-content/uploads/2015/01/image007-1024x743.png" alt="image007" width="700" height="508" />
+  
+  <p class="wp-caption-text">
+    Session length distribution
+  </p>
+</div>
+
+<p>On a final note! When I wanted to analyse the prizes of items bought, we found out that around 53% of the transactions have no associated prize (or quantity of items bought). When doing some search to understand this, I saw the following message from @abellogin (picture below). It turns out that data is simply missing!</p>
+
+<div id="attachment_359" style="width: 427px" class="wp-caption aligncenter">
+  <img class="wp-image-359 size-full" src="http://aloneindecember.com/words/wp-content/uploads/2015/01/image010.png" alt="image010" width="417" height="314" />
+  
+  <p class="wp-caption-text">
+    Something weird in the data &#8230;
+  </p>
+</div>
+
+<p><a href="http://aloneindecember.com/words/wp-content/uploads/2015/01/image011.png"><img class="aligncenter size-full wp-image-360" src="http://aloneindecember.com/words/wp-content/uploads/2015/01/image011.png" alt="image011" width="565" height="263" /></a></p>
+
+<p>Hi, I am <a href="https://www.insight-centre.org/users/humberto-corona">Humberto Corona</a> and I write this blog! Since October 2014, I am a PhD student at the Insight Centre for Data Analytics in UCD.  I would like to thank the members of the  <a href="https://www.insight-centre.org/about/team">recommender systems team</a> in the <a href="https://www.insight-centre.org">Insight Centre for Data Analytics</a> for their discussions on this topic.</p>
+
+    </section>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href="http://twitter.com/YourTwitterUsername">
+        <img class="avatar" src="/assets/images/avatar.png">
+        <div>
+            <span class="dark">Your Name</span>
+            <span>Blogging about stuffs</span>
+        </div>
+    </a>
+
+    <section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?text=http://yourblog-domain.com/recsys-challenge-part-i/ - recsys challenge: part I by @YourTwitterUsername"><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+    </section>
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+
+    <ul id="post-list" class="archive readmore">
+        <h3>Read more</h3>
+        
+            <li>
+                <a href="/govegan/">si, soy vegetariano<aside class="dates">Oct 16</aside></a>
+            </li>
+        
+            <li>
+                <a href="/on-references-change-and-standardisation/">On references, change and standardisation<aside class="dates">Sep 28</aside></a>
+            </li>
+        
+            <li>
+                <a href="/homesick-science-gallery/">HOME/SICK launch @ SCIENCE GALLERY<aside class="dates">May 07</aside></a>
+            </li>
+        
+            <li>
+                <a href="/lifelogging-launch-party/">LIFELOGGING launch party<aside class="dates">Mar 03</aside></a>
+            </li>
+        
+            <li>
+                <a href="/recsys-challenge-part-iii/">recsys challenge : part III<aside class="dates">Feb 03</aside></a>
+            </li>
+        
+            <li>
+                <a href="/recsys-challenge-part-ii/">recsys challenge: part II<aside class="dates">Jan 15</aside></a>
+            </li>
+        
+            <li>
+                <a href="/recsys-challenge-part-i/">recsys challenge: part I<aside class="dates">Jan 06</aside></a>
+            </li>
+        
+            <li>
+                <a href="/a-weekend-of-art-in-san-francisco/">A Weekend of Art in San Francisco<aside class="dates">Dec 16</aside></a>
+            </li>
+        
+            <li>
+                <a href="/330/">Ryan McGinley, perpetua y dinámica juventud y belleza<aside class="dates">Dec 03</aside></a>
+            </li>
+        
+            <li>
+                <a href="/black-gone/">black, gone.<aside class="dates">Sep 27</aside></a>
+            </li>
+        
+            <li>
+                <a href="/on-what-comes-after-us/">On what comes after us<aside class="dates">Jul 30</aside></a>
+            </li>
+        
+            <li>
+                <a href="/on-my-inhibition-when-speaking/">On my inhibition when speaking<aside class="dates">Jul 30</aside></a>
+            </li>
+        
+            <li>
+                <a href="/on-time-and-space-ii/">On time<aside class="dates">Jul 13</aside></a>
+            </li>
+        
+            <li>
+                <a href="/a-weekend-of-art-in-london/">A weekend of art in London<aside class="dates">Jul 13</aside></a>
+            </li>
+        
+            <li>
+                <a href="/215/">On length, time and space<aside class="dates">May 16</aside></a>
+            </li>
+        
+            <li>
+                <a href="/patrick-scott-image-space-light-at-imma/">Patrick Scott: Image Space Light at IMMA<aside class="dates">Mar 05</aside></a>
+            </li>
+        
+            <li>
+                <a href="/haus-tugendhat/">haus tugendhat<aside class="dates">Feb 25</aside></a>
+            </li>
+        
+            <li>
+                <a href="/some-movies-about-artits-i-saw-in-2013-the-painter/">some movies about artits I saw in 2013 : the Painter<aside class="dates">Jan 28</aside></a>
+            </li>
+        
+            <li>
+                <a href="/some-movies-about-artists-i-saw-in-2013-the-architects-list/">some movies about artists I saw in 2013 : the architects list<aside class="dates">Jan 13</aside></a>
+            </li>
+        
+            <li>
+                <a href="/2013/welcome-to-jekyll/">Welcome to Jekyll!<aside class="dates">Nov 10</aside></a>
+            </li>
+        
+            <li>
+                <a href="/the-issue-magazine/">the issue magazine<aside class="dates">Feb 16</aside></a>
+            </li>
+        
+            <li>
+                <a href="/dallas-green-city-and-colour/">Dallas Green, City and Colour<aside class="dates">Feb 06</aside></a>
+            </li>
+        
+            <li>
+                <a href="/mcginley-ryan/">McGinley, Ryan.<aside class="dates">Feb 03</aside></a>
+            </li>
+        
+            <li>
+                <a href="/fixed-gear-video-teaser/">fixed gear video teaser<aside class="dates">Jan 22</aside></a>
+            </li>
+        
+            <li>
+                <a href="/instant-digital-no-thanks/">Polaroid, ?<aside class="dates">Jan 13</aside></a>
+            </li>
+        
+    </ul>
+
+
+
+
+
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/highlight.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXXX-X', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+

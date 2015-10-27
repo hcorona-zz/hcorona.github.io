@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Your New Jekyll Site - recsys challenge : part III</title>
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href="/rss.xml">
+  <link rel="stylesheet" href="/assets/css/highlight.css">
+</head>
+<body>
+
+  <nav class="main-nav">
+    
+        <a href="/"> <span class="arrow">←</span> Home </a>
+    
+
+    
+        
+            <a href="/about">About </a>
+        
+    
+    <a class="cta" href="/feed.xml">Subscribe</a>
+</nav>
+
+  
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>recsys challenge : part III</h1>
+        <h2 class="headline">February 3, 2015</h2>
+    </header>
+    <section id="post-body">
+        <p>In the last two posts about the recsys challenge  (<a href="http://aloneindecember.com/words/recsys-challenge-part-i/">part</a> I and <a href="http://aloneindecember.com/words/recsys-challenge-part-ii/">part II</a>) I have discussed in detail some aspects of this year&#8217;s challenge data. This time I present an analysis of the data from the point of view of categories and the role they play in clicks, sessions and buys.</p>
+
+<h2 style="text-align: center;">
+  Users seem to find items searching for brands,categories, or pushed by sales in the platform!
+</h2>
+
+<p><a href="https://www.youtube.com/watch?v=gWcYOz2fpMk">First things firsts</a>, we have 52K items distributed in 339 categories. However, clicks are not equally distributed across these categories, and nor are the items. As we expect, both follow a <a href="http://www.longtail.com/about.html">long tail</a> distribution.</p>
+
+<p>Let&#8217;s take a closer look at items and clicks. <em>Which category gets the most number of clicks? What categories gets a higher number of purchases?</em>  The figure below shows the distribution of clicks across categories. The horizontal axis shows all the categories in the dataset (sorted by number of clicks)  and the vertical axis shows the number of clicks per each category in a logarithmic scale. Thus, we know that there are a very limited number of categories that get most of the clicks (around 50), while the remainder 250 or so get a very limited number of clicks.  Worth mentioning that the decay of the distribution is very steep, like the Cliffs of Moher (as seen in my <a href="http://diary.aloneindecember.com/post/91981935551">visual diary</a>)</p>
+
+<div id="attachment_427" style="width: 710px" class="wp-caption aligncenter">
+  <a href="http://aloneindecember.com/words/wp-content/uploads/2015/02/cat_pop_clicks.png"><img class="size-large wp-image-427" src="http://aloneindecember.com/words/wp-content/uploads/2015/02/cat_pop_clicks-1024x613.png" alt="The distribution of categories across clicks follows a long tail distribution" width="700" height="419" /></a>
+  
+  <p class="wp-caption-text">
+    The distribution of categories across clicks follows a long tail distribution
+  </p>
+</div>
+
+<p>Let&#8217;s take a closer look at the distribution. The figure below focuses on the top 10 categories, sorted by number of clicks. Together, all the items from the category &#8216;0&#8217; where clicked 16337653 times, which is 155 times more clicks than for category &#8216;9&#8217;, in which users clicked 105282 times. In fact, the first 10 categories shown below account for 99% of all clicks in the dataset. Leaving the remainder 299 categories with only 1% of the clicks, very uninteresting items seems to be &#8230;</p>
+
+<p>Besides the distribution, something that strikes me is why is there an <span style="color: #ff99cc;"><em><strong>&#8216;S&#8217;</strong></em></span> category, when all the other categories are encoded with numbers? Does it has an special meaning? Comments section is open if you have an answer or theory.</p>
+
+<div id="attachment_432" style="width: 710px" class="wp-caption aligncenter">
+  <a href="http://aloneindecember.com/words/wp-content/uploads/2015/02/cat_pop_clicks_top2.png"><img class="wp-image-432 size-large" src="http://aloneindecember.com/words/wp-content/uploads/2015/02/cat_pop_clicks_top2-1024x613.png" alt="cat_pop_clicks_top" width="700" height="419" /></a>
+  
+  <p class="wp-caption-text">
+    Distribution of clicks for the top 10 most clicked categories
+  </p>
+</div>
+
+<p>Now we can compare the graph above  with the one below, obtained from <a href="http://www.walkersands.com/futureofretail">Walker Sands’ 2014 future of retail study</a>.We could asume, or figure out that the categories are also organised as below. Dreaming or imagining is free, so why not? Anyway, that doesn’t tells much. If we knew what type of categories get more buys and that was different to the clicks they get, that would be intresting, right? <strong>#moredataplease </strong></p>
+
+<div id="attachment_440" style="width: 310px" class="wp-caption aligncenter">
+  <a href="http://aloneindecember.com/words/wp-content/uploads/2015/02/Screen-Shot-2015-02-01-at-17.32.01.png"><img class="wp-image-440 size-medium" src="http://aloneindecember.com/words/wp-content/uploads/2015/02/Screen-Shot-2015-02-01-at-17.32.01-300x214.png" alt="The categories of products most bought online" width="300" height="214" /></a>
+  
+  <p class="wp-caption-text">
+    The categories of products most bought online
+  </p>
+</div>
+
+<p>I know have more questions than when I started. For example,* is the distribution of categories across items the same as across clicks? Do categories get more clicks because those categories have more items?* <strong>NO!</strong></p>
+
+<p>The graph below shows the top 10 categories sorted by number of items. The vertical axis shows each category with it&#8217;s id, sorted by the category size, while the vertical item represents the number of items in a logarithmic scale.  We see some of the categories from the graph above, while some new categories come in, showing that not all the categories with a large number of items necessarily get a large number of clicks.</p>
+
+<div id="attachment_434" style="width: 710px" class="wp-caption aligncenter">
+  <a href="http://aloneindecember.com/words/wp-content/uploads/2015/02/cat_items1.png"><img class="size-large wp-image-434" src="http://aloneindecember.com/words/wp-content/uploads/2015/02/cat_items1-1024x613.png" alt="Distribution of categories across items" width="700" height="419" /></a>
+  
+  <p class="wp-caption-text">
+    Distribution of categories across items
+  </p>
+</div>
+
+<p>So far so good, all pretty boring until here &#8230; except for the magic &#8220;S&#8221; and the category &#8220;0&#8221;. The way the data is presented, we could assume that each item belongs to only one category. However, the figure below shows that this is not the case. Some items appear in our click data with more than one category in different transactions, now that is something I didn&#8217;t expect&#8230;</p>
+
+<div id="attachment_437" style="width: 710px" class="wp-caption aligncenter">
+  <a href="http://aloneindecember.com/words/wp-content/uploads/2015/02/correlation2.png"><img class="wp-image-437 size-large" src="http://aloneindecember.com/words/wp-content/uploads/2015/02/correlation2-1024x613.png" alt="correlation" width="700" height="419" /></a>
+  
+  <p class="wp-caption-text">
+    Correlation between categories
+  </p>
+</div>
+
+<p>The figure above shows the number of shared items among the biggest categories (transformed by a logarithm for better visualisation). The first thing we see is that the category &#8216;0&#8217; is highly correlated to all the other ones, the same goes for category &#8216;S&#8217;. My assumption here is that those categories are used as &#8216;<em>default</em>&#8216; or &#8216;<em>none</em>&#8216;, and at some point they are replaced by a better indicator of the category, or simply those are categories which apply to almost every item.  Either ways, it is something to bare in mind when building the models to predict purchases</p>
+
+<p>We can see from the graph above that category &#8216;0&#8217; is highly correlated to most of the other top 10 cateories. But that is not the case for most of them (except &#8216;S&#8217; which is also correlated to most of the others). My assumption is that category 0 just means no category, and category S means something similar . However, we know that the data is dynamic, so the products might be unlabeled and then labeled, or mislabeled, and then unlabeled … the magic of real world data?</p>
+
+<p>Finally, we can analyse the categories and sessions together, with the hope to find more answers, and even more questions. <em>Do people tend to click in many categories, do they browse mostly in one category?</em> The graph below shows that users tend to browse within one category.</p>
+
+<div id="attachment_439" style="width: 710px" class="wp-caption aligncenter">
+  <a href="http://aloneindecember.com/words/wp-content/uploads/2015/02/cat_sessions.png"><img class="wp-image-439 size-large" src="http://aloneindecember.com/words/wp-content/uploads/2015/02/cat_sessions-1024x613.png" alt="cat_sessions" width="700" height="419" /></a>
+  
+  <p class="wp-caption-text">
+    In a typical session, the user browses though only one or two categories
+  </p>
+</div>
+
+<p>&nbsp;</p>
+
+<p>This is the typical scenario, where you are looking to buy the latest Lena Dunham book, <a href="http://www.amazon.co.uk/Not-That-Kind-Girl-Learned/dp/0008101264/ref=sr_1_1?ie=UTF8&amp;qid=1422988023&amp;sr=8-1&amp;keywords=lenna+dunham">I’m not that kind of girl</a> (highly recommendable one by the way) and you get lost browsing though thousands of similar books such as Tavi Gevison’s <a href="http://www.amazon.co.uk/s/ref=a9_sc_1?rh=i%3Aaps%2Ck%3Arookie+yearbook&amp;keywords=rookie+yearbook&amp;ie=UTF8&amp;qid=1422988039">Rookie yearbook</a>. However, in the same session you wouldn’t probably search for a <a href="http://www.amazon.co.uk/Kitchen-Craft-KCBANSLICE-Banana-Slicer/dp/B003CLFC98/ref=sr_1_1?ie=UTF8&amp;qid=1422988086&amp;sr=8-1&amp;keywords=banana+slicer">Banana slicer</a> (a very popular and mediocre item in amazon with hilarious reviews)</p>
+
+<p><strong>As you might have figured out already, I don&#8217;t answer all the questions I propose.</strong> Some of them will be left for future posts, some of them are food for thought. Download the data, do the analysis and share it!  Finally,  I would like to thank the members of the  <a href="https://www.insight-centre.org/about/team">recommender systems team</a> in the <a href="https://www.insight-centre.org">Insight Centre for Data Analytics</a> for their discussions on this topic. Some of the figures here were first shown to me by them.</p>
+
+    </section>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href="http://twitter.com/YourTwitterUsername">
+        <img class="avatar" src="/assets/images/avatar.png">
+        <div>
+            <span class="dark">Your Name</span>
+            <span>Blogging about stuffs</span>
+        </div>
+    </a>
+
+    <section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?text=http://yourblog-domain.com/recsys-challenge-part-iii/ - recsys challenge : part III by @YourTwitterUsername"><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+    </section>
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+
+    <ul id="post-list" class="archive readmore">
+        <h3>Read more</h3>
+        
+            <li>
+                <a href="/govegan/">si, soy vegetariano<aside class="dates">Oct 16</aside></a>
+            </li>
+        
+            <li>
+                <a href="/on-references-change-and-standardisation/">On references, change and standardisation<aside class="dates">Sep 28</aside></a>
+            </li>
+        
+            <li>
+                <a href="/homesick-science-gallery/">HOME/SICK launch @ SCIENCE GALLERY<aside class="dates">May 07</aside></a>
+            </li>
+        
+            <li>
+                <a href="/lifelogging-launch-party/">LIFELOGGING launch party<aside class="dates">Mar 03</aside></a>
+            </li>
+        
+            <li>
+                <a href="/recsys-challenge-part-iii/">recsys challenge : part III<aside class="dates">Feb 03</aside></a>
+            </li>
+        
+            <li>
+                <a href="/recsys-challenge-part-ii/">recsys challenge: part II<aside class="dates">Jan 15</aside></a>
+            </li>
+        
+            <li>
+                <a href="/recsys-challenge-part-i/">recsys challenge: part I<aside class="dates">Jan 06</aside></a>
+            </li>
+        
+            <li>
+                <a href="/a-weekend-of-art-in-san-francisco/">A Weekend of Art in San Francisco<aside class="dates">Dec 16</aside></a>
+            </li>
+        
+            <li>
+                <a href="/330/">Ryan McGinley, perpetua y dinámica juventud y belleza<aside class="dates">Dec 03</aside></a>
+            </li>
+        
+            <li>
+                <a href="/black-gone/">black, gone.<aside class="dates">Sep 27</aside></a>
+            </li>
+        
+            <li>
+                <a href="/on-what-comes-after-us/">On what comes after us<aside class="dates">Jul 30</aside></a>
+            </li>
+        
+            <li>
+                <a href="/on-my-inhibition-when-speaking/">On my inhibition when speaking<aside class="dates">Jul 30</aside></a>
+            </li>
+        
+            <li>
+                <a href="/on-time-and-space-ii/">On time<aside class="dates">Jul 13</aside></a>
+            </li>
+        
+            <li>
+                <a href="/a-weekend-of-art-in-london/">A weekend of art in London<aside class="dates">Jul 13</aside></a>
+            </li>
+        
+            <li>
+                <a href="/215/">On length, time and space<aside class="dates">May 16</aside></a>
+            </li>
+        
+            <li>
+                <a href="/patrick-scott-image-space-light-at-imma/">Patrick Scott: Image Space Light at IMMA<aside class="dates">Mar 05</aside></a>
+            </li>
+        
+            <li>
+                <a href="/haus-tugendhat/">haus tugendhat<aside class="dates">Feb 25</aside></a>
+            </li>
+        
+            <li>
+                <a href="/some-movies-about-artits-i-saw-in-2013-the-painter/">some movies about artits I saw in 2013 : the Painter<aside class="dates">Jan 28</aside></a>
+            </li>
+        
+            <li>
+                <a href="/some-movies-about-artists-i-saw-in-2013-the-architects-list/">some movies about artists I saw in 2013 : the architects list<aside class="dates">Jan 13</aside></a>
+            </li>
+        
+            <li>
+                <a href="/2013/welcome-to-jekyll/">Welcome to Jekyll!<aside class="dates">Nov 10</aside></a>
+            </li>
+        
+            <li>
+                <a href="/the-issue-magazine/">the issue magazine<aside class="dates">Feb 16</aside></a>
+            </li>
+        
+            <li>
+                <a href="/dallas-green-city-and-colour/">Dallas Green, City and Colour<aside class="dates">Feb 06</aside></a>
+            </li>
+        
+            <li>
+                <a href="/mcginley-ryan/">McGinley, Ryan.<aside class="dates">Feb 03</aside></a>
+            </li>
+        
+            <li>
+                <a href="/fixed-gear-video-teaser/">fixed gear video teaser<aside class="dates">Jan 22</aside></a>
+            </li>
+        
+            <li>
+                <a href="/instant-digital-no-thanks/">Polaroid, ?<aside class="dates">Jan 13</aside></a>
+            </li>
+        
+    </ul>
+
+
+
+
+
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/highlight.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXXX-X', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
+
+
+

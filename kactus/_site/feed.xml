@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Your New Jekyll Site</title>
+    <description>Blogging about stuffs</description>
+    <link>http://your-blog-url.example.com</link>
+    <atom:link href="http://your-blog-url.example.com/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>si, soy vegetariano</title>
+        
+        
+          <description>&lt;p&gt;Muchísimas veces mis amigos, familia, o simples desconocidos me han preguntado ¿Por qué soy vegetariano? La respuesta corta es porque si!, la respuesta larga está aquí.&lt;/p&gt;
+</description>
+        
+        <pubDate>Fri, 16 Oct 2015 00:00:00 +0100</pubDate>
+        <link>http://your-blog-url.example.com/govegan/</link>
+        <guid isPermaLink="true">http://your-blog-url.example.com/govegan/</guid>
+      </item>
+    
+      <item>
+        <title>On references, change and standardisation</title>
+        
+        
+          <description>&lt;p&gt;In the last week I wasted half a day fixing citations for a journal paper. HALF-A-DAY that I could have spent doing actual research! Here is what we should do about it.&lt;/p&gt;
+</description>
+        
+        <pubDate>Mon, 28 Sep 2015 00:00:00 +0100</pubDate>
+        <link>http://your-blog-url.example.com/on-references-change-and-standardisation/</link>
+        <guid isPermaLink="true">http://your-blog-url.example.com/on-references-change-and-standardisation/</guid>
+      </item>
+    
+      <item>
+        <title>HOME/SICK launch @ SCIENCE GALLERY</title>
+        
+        
+          <description>&lt;div id=&quot;attachment_490&quot; style=&quot;width: 710px&quot; class=&quot;wp-caption aligncenter&quot;&gt;
+  &lt;a href=&quot;http://aloneindecember.com/words/wp-content/uploads/2015/04/IMG_1684.jpg&quot;&gt;&lt;img class=&quot;wp-image-490 size-large&quot; src=&quot;http://aloneindecember.com/words/wp-content/uploads/2015/04/IMG_1684-1024x769.jpg&quot; alt=&quot;IMG_1684&quot; width=&quot;700&quot; height=&quot;526&quot; /&gt;&lt;/a&gt;
+  
+  &lt;p class=&quot;wp-caption-text&quot;&gt;
+    All the pieces of the exhibition
+  &lt;/p&gt;
+&lt;/div&gt;
+</description>
+        
+        <pubDate>Thu, 07 May 2015 00:00:00 +0100</pubDate>
+        <link>http://your-blog-url.example.com/homesick-science-gallery/</link>
+        <guid isPermaLink="true">http://your-blog-url.example.com/homesick-science-gallery/</guid>
+      </item>
+    
+      <item>
+        <title>LIFELOGGING launch party</title>
+        
+        
+          <description>&lt;p&gt;Last Thursday I attended the launch party for the [Science Gallery&amp;#8217;s][1] upcoming exhibition entitled [#LIFELOGGING.][2]   Let me first put this into context. The science gallery is one of my favourite museums in the world, and definetly one of my favourite places in Dublin. It manages to put together great show s where art and science not only mix, but fades together for three months. A truly collaborative enriching experience for both disciplines. This exhibition is my favourite so far, and I wrote about it for my friends at [THE ISSUE][3]. Read the full entry on their website!&lt;/p&gt;
+</description>
+        
+        <pubDate>Tue, 03 Mar 2015 00:00:00 +0000</pubDate>
+        <link>http://your-blog-url.example.com/lifelogging-launch-party/</link>
+        <guid isPermaLink="true">http://your-blog-url.example.com/lifelogging-launch-party/</guid>
+      </item>
+    
+      <item>
+        <title>recsys challenge : part III</title>
+        
+        
+          <description>&lt;p&gt;In the last two posts about the recsys challenge  ([part][1] I and [part II][2]) I have discussed in detail some aspects of this year&amp;#8217;s challenge data. This time I present an analysis of the data from the point of view of categories and the role they play in clicks, sessions and buys.&lt;/p&gt;
+</description>
+        
+        <pubDate>Tue, 03 Feb 2015 00:00:00 +0000</pubDate>
+        <link>http://your-blog-url.example.com/recsys-challenge-part-iii/</link>
+        <guid isPermaLink="true">http://your-blog-url.example.com/recsys-challenge-part-iii/</guid>
+      </item>
+    
+      <item>
+        <title>recsys challenge: part II</title>
+        
+        
+          <description>&lt;p&gt;After my first entry on the recsys challenge ([recsys challenge: part I][1]) , I now show analyse some time patterns more in depth. It is important to understand &lt;strong&gt;when do people browse and buy?&lt;/strong&gt;, to include that information in our model (if that turns out to be valuable)&lt;/p&gt;
+</description>
+        
+        <pubDate>Thu, 15 Jan 2015 00:00:00 +0000</pubDate>
+        <link>http://your-blog-url.example.com/recsys-challenge-part-ii/</link>
+        <guid isPermaLink="true">http://your-blog-url.example.com/recsys-challenge-part-ii/</guid>
+      </item>
+    
+      <item>
+        <title>recsys challenge: part I</title>
+        
+        
+          <description>&lt;p&gt;[RecSys’15][1] is ready to roll! We have a date, a venue, a call for papers, and, of course, a challenge. Last November, the details for this year&amp;#8217;s RecSys challenge were announced, and the leaderboards are already getting submissions (more info in the [RecSys&amp;#8217;15 website][2] and the [challenge website][3])&lt;/p&gt;
+</description>
+        
+        <pubDate>Tue, 06 Jan 2015 00:00:00 +0000</pubDate>
+        <link>http://your-blog-url.example.com/recsys-challenge-part-i/</link>
+        <guid isPermaLink="true">http://your-blog-url.example.com/recsys-challenge-part-i/</guid>
+      </item>
+    
+      <item>
+        <title>A Weekend of Art in San Francisco</title>
+        
+        
+          <description>&lt;p&gt;Last October I spent 10 days in San Francisco, my friends at [THE ISSUE magazine][1] were kind enough to publish my art review of a weekend in the city. Featuring the most interesting museums and the new exhibition @large from Ai Weiwei in Alcatraz, you can read it in their [blog][1].&lt;/p&gt;
+</description>
+        
+        <pubDate>Tue, 16 Dec 2014 00:00:00 +0000</pubDate>
+        <link>http://your-blog-url.example.com/a-weekend-of-art-in-san-francisco/</link>
+        <guid isPermaLink="true">http://your-blog-url.example.com/a-weekend-of-art-in-san-francisco/</guid>
+      </item>
+    
+      <item>
+        <title>Ryan McGinley, perpetua y dinámica juventud y belleza</title>
+        
+        
+          <description>&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+</description>
+        
+        <pubDate>Wed, 03 Dec 2014 00:00:00 +0000</pubDate>
+        <link>http://your-blog-url.example.com/330/</link>
+        <guid isPermaLink="true">http://your-blog-url.example.com/330/</guid>
+      </item>
+    
+      <item>
+        <title>black, gone.</title>
+        
+        
+          <description>&lt;p style=&quot;text-align: center;&quot;&gt;
+  Your pictures are gone,&lt;br /&gt; and so is my love,&lt;br /&gt; my friendship, my willingness.&lt;br /&gt; And so are all my failed efforts to evolve.&lt;br /&gt; gone, gone, gone!
+&lt;/p&gt;
+</description>
+        
+        <pubDate>Sat, 27 Sep 2014 00:00:00 +0100</pubDate>
+        <link>http://your-blog-url.example.com/black-gone/</link>
+        <guid isPermaLink="true">http://your-blog-url.example.com/black-gone/</guid>
+      </item>
+    
+  </channel>
+</rss>
