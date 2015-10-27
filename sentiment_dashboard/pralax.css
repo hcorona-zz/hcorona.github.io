@@ -1,0 +1,39 @@
+#intro {
+	background-color: #E6FCFF;
+	height: auto;
+	margin: 0 auto;
+	width: 100%;
+	position: relative;
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+	padding: 50px 0;
+}
+
+#home {
+	background-color: #FFFDF9;
+	height: auto;
+	margin: 0 auto;
+	width: 100%;
+	position: relative;
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+	padding: 50px 0;
+}
+
+#about {
+	background-color: #EFF9FC;
+	height: auto;
+	margin: 0 auto;
+	width: 100%;
+	position: relative;
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+	padding: 50px 0;
+}
+
+#other {
+	background-color: #FFF9FC;
+	height: auto;
+	margin: 0 auto;
+	width: 100%;
+	position: relative;
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+	padding: 50px 0;
+}
