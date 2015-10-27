@@ -1,5 +1,5 @@
 # Site settings
-title:
+title: totopampin
 email:
 description: > # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
@@ -10,7 +10,7 @@ url: "" # the base hostname & protocol for your site
 
 # User setting
 owner: humberto
-email: hcorona@gmail.com
+email: 
 facebook_username:
 twitter_username: totopampin
 github_username: totopampin

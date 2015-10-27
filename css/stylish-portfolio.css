@@ -152,7 +152,7 @@ hr.small {
 
 .header {
     display: table;
-    position: relative;
+    position: centre;
     width: 100%;
     height: 100%;
     background: url(../img/bg.jpg) no-repeat center center scroll;
