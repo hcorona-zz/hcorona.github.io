@@ -2,17 +2,22 @@
 layout: default
 ---
 
+ {% include head.html %}
+ {% include about.html %}
+<body>
+ 
+
 <article id="main">
     <header class="special container">
         <span class="icon fa-mobile"></span>
-        <h2>My <strong>Blog</strong></h2>
+        <h2><strong>Words</strong></h2>
     </header>
     <section class="wrapper style4 container">
         <ul class="posts">
           {% for post in site.posts %}
             <li class="wrapper {% if forloop.first %} style2 {% else %} style1 {% endif %}">
               <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-                {{ post.excerpt }}
+              
                 <section class="special">
                     <ul class="buttons">
                         <li><a href="{{ post.url }}" class="button">Read more</a></li>
@@ -22,3 +27,9 @@ layout: default
         </ul>
     </section>
 </article>
+
+{% include footer.html %}
+
+</body>
+
+ 
